@@ -1,0 +1,29 @@
+@placeholder_background:rgb(255, 240, 223);
+@placeholder_border:#ccc;
+@label_background:#337ab7;
+
+.ou__files__primary-drag-label {
+  background:@label_background;
+  color:white;
+  display:none;
+  font-size:9px;
+  padding:1px 4px 0 4px;
+  position:absolute;
+  right:-10px;
+  top:10px;
+  text-transform:uppercase;
+  z-index:500;
+}
+
+.ou--primary .ou__files li {
+  cursor:move;
+}
+
+.ou__files li.ou__files--primary .ou__files__primary-drag-label {
+  display:block;
+}
+
+.ou__files li.ou__files__primary-drag-placeholder {
+  background:@placeholder_background;
+  border:3px dashed @placeholder_border;
+}

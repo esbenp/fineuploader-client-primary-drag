@@ -31,6 +31,7 @@ gulp.task('build-system', function () {
 gulp.task('build', function(callback) {
   return runSequence(
     'clean',
+    'styles',
     ['build-es6', 'build-commonjs', 'build-amd', 'build-system'],
     callback
   );
