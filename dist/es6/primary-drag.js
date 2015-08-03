@@ -49,7 +49,7 @@ export class PrimaryDrag {
               top = ui.helper.position().top;
 
           self.children().each(function () {
-            if ($(this).hasClass('ui-sortable-helper') || $(this).hasClass('uploader-sortable-placeholder')) {
+            if ($(this).hasClass('ui-sortable-helper') || $(this).hasClass(PLACEHOLDER_CLASS)) {
               return true;
             }
             // If overlap is more than half of the dragged item
@@ -58,9 +58,9 @@ export class PrimaryDrag {
 
             if ((width - distance) > (width / 2) && (distance < width) && $(this).position().top === top) {
               if (before) {
-                $('.uploader-sortable-placeholder', self).insertBefore($(this));
+                $('.'+PLACEHOLDER_CLASS, self).insertBefore($(this));
               } else {
-                $('.uploader-sortable-placeholder', self).insertAfter($(this));
+                $('.'+PLACEHOLDER_CLASS, self).insertAfter($(this));
               }
               return false;
             }

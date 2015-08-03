@@ -64,7 +64,7 @@ System.register(['fineuploader-client/utilities', 'fineuploader-client/dom/utili
                   top = ui.helper.position().top;
 
               self.children().each(function () {
-                if ($(this).hasClass('ui-sortable-helper') || $(this).hasClass('uploader-sortable-placeholder')) {
+                if ($(this).hasClass('ui-sortable-helper') || $(this).hasClass(PLACEHOLDER_CLASS)) {
                   return true;
                 }
 
@@ -73,9 +73,9 @@ System.register(['fineuploader-client/utilities', 'fineuploader-client/dom/utili
 
                 if (width - distance > width / 2 && distance < width && $(this).position().top === top) {
                   if (before) {
-                    $('.uploader-sortable-placeholder', self).insertBefore($(this));
+                    $('.' + PLACEHOLDER_CLASS, self).insertBefore($(this));
                   } else {
-                    $('.uploader-sortable-placeholder', self).insertAfter($(this));
+                    $('.' + PLACEHOLDER_CLASS, self).insertAfter($(this));
                   }
                   return false;
                 }

@@ -54,7 +54,7 @@ define(['exports', 'fineuploader-client/utilities', 'fineuploader-client/dom/uti
               top = ui.helper.position().top;
 
           self.children().each(function () {
-            if (_$['default'](this).hasClass('ui-sortable-helper') || _$['default'](this).hasClass('uploader-sortable-placeholder')) {
+            if (_$['default'](this).hasClass('ui-sortable-helper') || _$['default'](this).hasClass(_constants.PLACEHOLDER_CLASS)) {
               return true;
             }
 
@@ -63,9 +63,9 @@ define(['exports', 'fineuploader-client/utilities', 'fineuploader-client/dom/uti
 
             if (width - distance > width / 2 && distance < width && _$['default'](this).position().top === top) {
               if (before) {
-                _$['default']('.uploader-sortable-placeholder', self).insertBefore(_$['default'](this));
+                _$['default']('.' + _constants.PLACEHOLDER_CLASS, self).insertBefore(_$['default'](this));
               } else {
-                _$['default']('.uploader-sortable-placeholder', self).insertAfter(_$['default'](this));
+                _$['default']('.' + _constants.PLACEHOLDER_CLASS, self).insertAfter(_$['default'](this));
               }
               return false;
             }

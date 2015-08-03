@@ -69,7 +69,7 @@ var PrimaryDrag = (function () {
             top = ui.helper.position().top;
 
         self.children().each(function () {
-          if (_jquery2['default'](this).hasClass('ui-sortable-helper') || _jquery2['default'](this).hasClass('uploader-sortable-placeholder')) {
+          if (_jquery2['default'](this).hasClass('ui-sortable-helper') || _jquery2['default'](this).hasClass(_constants.PLACEHOLDER_CLASS)) {
             return true;
           }
 
@@ -78,9 +78,9 @@ var PrimaryDrag = (function () {
 
           if (width - distance > width / 2 && distance < width && _jquery2['default'](this).position().top === top) {
             if (before) {
-              _jquery2['default']('.uploader-sortable-placeholder', self).insertBefore(_jquery2['default'](this));
+              _jquery2['default']('.' + _constants.PLACEHOLDER_CLASS, self).insertBefore(_jquery2['default'](this));
             } else {
-              _jquery2['default']('.uploader-sortable-placeholder', self).insertAfter(_jquery2['default'](this));
+              _jquery2['default']('.' + _constants.PLACEHOLDER_CLASS, self).insertAfter(_jquery2['default'](this));
             }
             return false;
           }
