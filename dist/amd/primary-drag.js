@@ -1,4 +1,4 @@
-define(['exports', 'fineuploader-client/utilities', 'fineuploader-client/dom/utilities', './constants', 'jquery', 'jquery-ui/ui/core', 'jquery-ui/ui/widget', 'jquery-ui/ui/mouse', 'jquery-ui/ui/sortable'], function (exports, _fineuploaderClientUtilities, _fineuploaderClientDomUtilities, _constants, _jquery, _jqueryUiUiCore, _jqueryUiUiWidget, _jqueryUiUiMouse, _jqueryUiUiSortable) {
+define(['exports', 'fineuploader-client/utilities', 'fineuploader-client/dom/utilities', './constants', 'jquery', 'jquery-ui/core', 'jquery-ui/widget', 'jquery-ui/mouse', 'jquery-ui/sortable'], function (exports, _fineuploaderClientUtilities, _fineuploaderClientDomUtilities, _constants, _jquery, _jqueryUiUiCore, _jqueryUiUiWidget, _jqueryUiUiMouse, _jqueryUiUiSortable) {
   'use strict';
 
   exports.__esModule = true;

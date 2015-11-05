@@ -16,19 +16,19 @@ var _jquery = require('jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _jqueryUiUiCore = require('jquery-ui/ui/core');
+var _jqueryUiUiCore = require('jquery-ui/core');
 
 var _jqueryUiUiCore2 = _interopRequireDefault(_jqueryUiUiCore);
 
-var _jqueryUiUiWidget = require('jquery-ui/ui/widget');
+var _jqueryUiUiWidget = require('jquery-ui/widget');
 
 var _jqueryUiUiWidget2 = _interopRequireDefault(_jqueryUiUiWidget);
 
-var _jqueryUiUiMouse = require('jquery-ui/ui/mouse');
+var _jqueryUiUiMouse = require('jquery-ui/mouse');
 
 var _jqueryUiUiMouse2 = _interopRequireDefault(_jqueryUiUiMouse);
 
-var _jqueryUiUiSortable = require('jquery-ui/ui/sortable');
+var _jqueryUiUiSortable = require('jquery-ui/sortable');
 
 var _jqueryUiUiSortable2 = _interopRequireDefault(_jqueryUiUiSortable);
 

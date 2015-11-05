@@ -9,10 +9,10 @@ import {
   PRIMARY_CLASS
 } from './constants';
 import $ from 'jquery';
-import ui from 'jquery-ui/ui/core';
-import widgetFactory from 'jquery-ui/ui/widget';
-import mouseInteraction from 'jquery-ui/ui/mouse';
-import sortable from 'jquery-ui/ui/sortable';
+import ui from 'jquery-ui/core';
+import widgetFactory from 'jquery-ui/widget';
+import mouseInteraction from 'jquery-ui/mouse';
+import sortable from 'jquery-ui/sortable';
 
 export class PrimaryDrag {
   constructor(callback) {

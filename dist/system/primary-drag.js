@@ -1,4 +1,4 @@
-System.register(['fineuploader-client/utilities', 'fineuploader-client/dom/utilities', './constants', 'jquery', 'jquery-ui/ui/core', 'jquery-ui/ui/widget', 'jquery-ui/ui/mouse', 'jquery-ui/ui/sortable'], function (_export) {
+System.register(['fineuploader-client/utilities', 'fineuploader-client/dom/utilities', './constants', 'jquery', 'jquery-ui/core', 'jquery-ui/widget', 'jquery-ui/mouse', 'jquery-ui/sortable'], function (_export) {
   'use strict';
 
   var isFunction, getContainer, getFileList, CONTAINER_CLASS, PLACEHOLDER_CLASS, PRIMARY_CLASS, $, ui, widgetFactory, mouseInteraction, sortable, PrimaryDrag;
