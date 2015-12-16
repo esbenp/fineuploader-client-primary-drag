@@ -16,21 +16,21 @@ var _jquery = require('jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _jqueryUiUiCore = require('jquery-ui/core');
+var _jqueryUiCore = require('jquery-ui/core');
 
-var _jqueryUiUiCore2 = _interopRequireDefault(_jqueryUiUiCore);
+var _jqueryUiCore2 = _interopRequireDefault(_jqueryUiCore);
 
-var _jqueryUiUiWidget = require('jquery-ui/widget');
+var _jqueryUiWidget = require('jquery-ui/widget');
 
-var _jqueryUiUiWidget2 = _interopRequireDefault(_jqueryUiUiWidget);
+var _jqueryUiWidget2 = _interopRequireDefault(_jqueryUiWidget);
 
-var _jqueryUiUiMouse = require('jquery-ui/mouse');
+var _jqueryUiMouse = require('jquery-ui/mouse');
 
-var _jqueryUiUiMouse2 = _interopRequireDefault(_jqueryUiUiMouse);
+var _jqueryUiMouse2 = _interopRequireDefault(_jqueryUiMouse);
 
-var _jqueryUiUiSortable = require('jquery-ui/sortable');
+var _jqueryUiSortable = require('jquery-ui/sortable');
 
-var _jqueryUiUiSortable2 = _interopRequireDefault(_jqueryUiUiSortable);
+var _jqueryUiSortable2 = _interopRequireDefault(_jqueryUiSortable);
 
 var PrimaryDrag = (function () {
   function PrimaryDrag(callback) {
@@ -61,7 +61,7 @@ var PrimaryDrag = (function () {
     var list = _fineuploaderClientDomUtilities.getFileList(this._uploader.settings.container);
 
     list.sortable({
-      containment: 'parent',
+      containment: "parent",
       placeholder: _constants.PLACEHOLDER_CLASS,
       sort: function sort(event, ui) {
         var self = _jquery2['default'](this),
@@ -99,10 +99,15 @@ var PrimaryDrag = (function () {
   PrimaryDrag.prototype._setPrimary = function _setPrimary() {
     var list = _fineuploaderClientDomUtilities.getFileList(this._uploader.settings.container);
 
-    var first = list.children('li[qq-file-id]:first-child');
-    var current = list.children('li[qq-file-id].' + _constants.PRIMARY_CLASS);
+    var first = list.children("li[qq-file-id]:first-child");
+    var current = list.children("li[qq-file-id]." + _constants.PRIMARY_CLASS);
 
     current.removeClass(_constants.PRIMARY_CLASS);
+
+    if (_fineuploaderClientUtilities.isUndefined(first[0])) {
+      return true;
+    }
+
     first.addClass(_constants.PRIMARY_CLASS);
 
     var id = this._uploader.fineuploader.getId(first[0]);

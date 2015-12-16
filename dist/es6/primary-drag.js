@@ -1,4 +1,4 @@
-import {isFunction} from 'fineuploader-client/utilities';
+import {isFunction, isUndefined} from 'fineuploader-client/utilities';
 import {
   getContainer,
   getFileList
@@ -83,6 +83,13 @@ export class PrimaryDrag {
     var current = list.children("li[qq-file-id]." + PRIMARY_CLASS);
 
     current.removeClass(PRIMARY_CLASS);
+
+    // We do not want to reset primary if we deleted the last
+    // upload. See issue#2
+    if (isUndefined(first[0])) {
+      return true;
+    }
+
     first.addClass(PRIMARY_CLASS);
 
     var id = this._uploader.fineuploader.getId(first[0]);

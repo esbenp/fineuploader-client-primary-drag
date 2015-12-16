@@ -1,4 +1,4 @@
-define(['exports', 'fineuploader-client/utilities', 'fineuploader-client/dom/utilities', './constants', 'jquery', 'jquery-ui/core', 'jquery-ui/widget', 'jquery-ui/mouse', 'jquery-ui/sortable'], function (exports, _fineuploaderClientUtilities, _fineuploaderClientDomUtilities, _constants, _jquery, _jqueryUiUiCore, _jqueryUiUiWidget, _jqueryUiUiMouse, _jqueryUiUiSortable) {
+define(['exports', 'fineuploader-client/utilities', 'fineuploader-client/dom/utilities', './constants', 'jquery', 'jquery-ui/core', 'jquery-ui/widget', 'jquery-ui/mouse', 'jquery-ui/sortable'], function (exports, _fineuploaderClientUtilities, _fineuploaderClientDomUtilities, _constants, _jquery, _jqueryUiCore, _jqueryUiWidget, _jqueryUiMouse, _jqueryUiSortable) {
   'use strict';
 
   exports.__esModule = true;
@@ -9,13 +9,13 @@ define(['exports', 'fineuploader-client/utilities', 'fineuploader-client/dom/uti
 
   var _$ = _interopRequireDefault(_jquery);
 
-  var _ui = _interopRequireDefault(_jqueryUiUiCore);
+  var _ui = _interopRequireDefault(_jqueryUiCore);
 
-  var _widgetFactory = _interopRequireDefault(_jqueryUiUiWidget);
+  var _widgetFactory = _interopRequireDefault(_jqueryUiWidget);
 
-  var _mouseInteraction = _interopRequireDefault(_jqueryUiUiMouse);
+  var _mouseInteraction = _interopRequireDefault(_jqueryUiMouse);
 
-  var _sortable = _interopRequireDefault(_jqueryUiUiSortable);
+  var _sortable = _interopRequireDefault(_jqueryUiSortable);
 
   var PrimaryDrag = (function () {
     function PrimaryDrag(callback) {
@@ -46,7 +46,7 @@ define(['exports', 'fineuploader-client/utilities', 'fineuploader-client/dom/uti
       var list = _fineuploaderClientDomUtilities.getFileList(this._uploader.settings.container);
 
       list.sortable({
-        containment: 'parent',
+        containment: "parent",
         placeholder: _constants.PLACEHOLDER_CLASS,
         sort: function sort(event, ui) {
           var self = _$['default'](this),
@@ -84,10 +84,15 @@ define(['exports', 'fineuploader-client/utilities', 'fineuploader-client/dom/uti
     PrimaryDrag.prototype._setPrimary = function _setPrimary() {
       var list = _fineuploaderClientDomUtilities.getFileList(this._uploader.settings.container);
 
-      var first = list.children('li[qq-file-id]:first-child');
-      var current = list.children('li[qq-file-id].' + _constants.PRIMARY_CLASS);
+      var first = list.children("li[qq-file-id]:first-child");
+      var current = list.children("li[qq-file-id]." + _constants.PRIMARY_CLASS);
 
       current.removeClass(_constants.PRIMARY_CLASS);
+
+      if (_fineuploaderClientUtilities.isUndefined(first[0])) {
+        return true;
+      }
+
       first.addClass(_constants.PRIMARY_CLASS);
 
       var id = this._uploader.fineuploader.getId(first[0]);

@@ -1,13 +1,14 @@
 System.register(['fineuploader-client/utilities', 'fineuploader-client/dom/utilities', './constants', 'jquery', 'jquery-ui/core', 'jquery-ui/widget', 'jquery-ui/mouse', 'jquery-ui/sortable'], function (_export) {
   'use strict';
 
-  var isFunction, getContainer, getFileList, CONTAINER_CLASS, PLACEHOLDER_CLASS, PRIMARY_CLASS, $, ui, widgetFactory, mouseInteraction, sortable, PrimaryDrag;
+  var isFunction, isUndefined, getContainer, getFileList, CONTAINER_CLASS, PLACEHOLDER_CLASS, PRIMARY_CLASS, $, ui, widgetFactory, mouseInteraction, sortable, PrimaryDrag;
 
   function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
   return {
     setters: [function (_fineuploaderClientUtilities) {
       isFunction = _fineuploaderClientUtilities.isFunction;
+      isUndefined = _fineuploaderClientUtilities.isUndefined;
     }, function (_fineuploaderClientDomUtilities) {
       getContainer = _fineuploaderClientDomUtilities.getContainer;
       getFileList = _fineuploaderClientDomUtilities.getFileList;
@@ -17,14 +18,14 @@ System.register(['fineuploader-client/utilities', 'fineuploader-client/dom/utili
       PRIMARY_CLASS = _constants.PRIMARY_CLASS;
     }, function (_jquery) {
       $ = _jquery['default'];
-    }, function (_jqueryUiUiCore) {
-      ui = _jqueryUiUiCore['default'];
-    }, function (_jqueryUiUiWidget) {
-      widgetFactory = _jqueryUiUiWidget['default'];
-    }, function (_jqueryUiUiMouse) {
-      mouseInteraction = _jqueryUiUiMouse['default'];
-    }, function (_jqueryUiUiSortable) {
-      sortable = _jqueryUiUiSortable['default'];
+    }, function (_jqueryUiCore) {
+      ui = _jqueryUiCore['default'];
+    }, function (_jqueryUiWidget) {
+      widgetFactory = _jqueryUiWidget['default'];
+    }, function (_jqueryUiMouse) {
+      mouseInteraction = _jqueryUiMouse['default'];
+    }, function (_jqueryUiSortable) {
+      sortable = _jqueryUiSortable['default'];
     }],
     execute: function () {
       PrimaryDrag = (function () {
@@ -56,7 +57,7 @@ System.register(['fineuploader-client/utilities', 'fineuploader-client/dom/utili
           var list = getFileList(this._uploader.settings.container);
 
           list.sortable({
-            containment: 'parent',
+            containment: "parent",
             placeholder: PLACEHOLDER_CLASS,
             sort: function sort(event, ui) {
               var self = $(this),
@@ -94,10 +95,15 @@ System.register(['fineuploader-client/utilities', 'fineuploader-client/dom/utili
         PrimaryDrag.prototype._setPrimary = function _setPrimary() {
           var list = getFileList(this._uploader.settings.container);
 
-          var first = list.children('li[qq-file-id]:first-child');
-          var current = list.children('li[qq-file-id].' + PRIMARY_CLASS);
+          var first = list.children("li[qq-file-id]:first-child");
+          var current = list.children("li[qq-file-id]." + PRIMARY_CLASS);
 
           current.removeClass(PRIMARY_CLASS);
+
+          if (isUndefined(first[0])) {
+            return true;
+          }
+
           first.addClass(PRIMARY_CLASS);
 
           var id = this._uploader.fineuploader.getId(first[0]);
