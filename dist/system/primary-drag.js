@@ -46,15 +46,17 @@ System.register(['fineuploader-client/utilities', 'fineuploader-client/dom/utili
           return this._uploadPaths[id];
         };
 
-        PrimaryDrag.prototype._fireCallback = function _fireCallback(id, name, upload_path) {
+        PrimaryDrag.prototype._fireCallback = function _fireCallback(id, name, upload_path, order) {
           if (isFunction(this._callback)) {
-            this._callback(id, name, upload_path);
+            this._callback(id, name, upload_path, order);
           }
         };
 
         PrimaryDrag.prototype._initializeSortable = function _initializeSortable() {
           var self = this;
           var list = getFileList(this._uploader.settings.container);
+
+          var currentPrimary;
 
           list.sortable({
             containment: "parent",
@@ -63,6 +65,8 @@ System.register(['fineuploader-client/utilities', 'fineuploader-client/dom/utili
               var self = $(this),
                   width = ui.helper.outerWidth(),
                   top = ui.helper.position().top;
+
+              currentPrimary = list.children("li[qq-file-id]:first-child");
 
               self.children().each(function () {
                 if ($(this).hasClass('ui-sortable-helper') || $(this).hasClass(PLACEHOLDER_CLASS)) {
@@ -83,7 +87,16 @@ System.register(['fineuploader-client/utilities', 'fineuploader-client/dom/utili
               });
             },
             stop: function stop(event, ui) {
-              self._setPrimary();
+              var first = list.children("li[qq-file-id]:first-child");
+
+              var orderWasChanged = true;
+              var primaryWasChanged = false;
+
+              if (first.attr('qq-file-id') !== currentPrimary.attr('qq-file-id')) {
+                primaryWasChanged = true;
+              }
+
+              self._setPrimary(orderWasChanged, primaryWasChanged);
             }
           });
         };
@@ -92,7 +105,7 @@ System.register(['fineuploader-client/utilities', 'fineuploader-client/dom/utili
           this._setPrimary();
         };
 
-        PrimaryDrag.prototype._setPrimary = function _setPrimary() {
+        PrimaryDrag.prototype._setPrimary = function _setPrimary(orderWasChanged, primaryWasChanged) {
           var list = getFileList(this._uploader.settings.container);
 
           var first = list.children("li[qq-file-id]:first-child");
@@ -110,7 +123,13 @@ System.register(['fineuploader-client/utilities', 'fineuploader-client/dom/utili
           var name = this._uploader.fineuploader.getName(id);
           var upload_path = this._uploadPaths[id];
 
-          this._fireCallback(id, name, upload_path);
+          var order = [];
+          list.children('li[qq-file-id]').each(function (i, ele) {
+            var id = self._uploader.fineuploader.getId(ele);
+            order.push(self._uploadPaths[id]);
+          });
+
+          this._fireCallback(id, name, upload_path, order);
         };
 
         PrimaryDrag.prototype._setupListeners = function _setupListeners() {

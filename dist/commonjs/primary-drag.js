@@ -50,15 +50,17 @@ var PrimaryDrag = (function () {
     return this._uploadPaths[id];
   };
 
-  PrimaryDrag.prototype._fireCallback = function _fireCallback(id, name, upload_path) {
+  PrimaryDrag.prototype._fireCallback = function _fireCallback(id, name, upload_path, order) {
     if (_fineuploaderClientUtilities.isFunction(this._callback)) {
-      this._callback(id, name, upload_path);
+      this._callback(id, name, upload_path, order);
     }
   };
 
   PrimaryDrag.prototype._initializeSortable = function _initializeSortable() {
     var self = this;
     var list = _fineuploaderClientDomUtilities.getFileList(this._uploader.settings.container);
+
+    var currentPrimary;
 
     list.sortable({
       containment: "parent",
@@ -67,6 +69,8 @@ var PrimaryDrag = (function () {
         var self = _jquery2['default'](this),
             width = ui.helper.outerWidth(),
             top = ui.helper.position().top;
+
+        currentPrimary = list.children("li[qq-file-id]:first-child");
 
         self.children().each(function () {
           if (_jquery2['default'](this).hasClass('ui-sortable-helper') || _jquery2['default'](this).hasClass(_constants.PLACEHOLDER_CLASS)) {
@@ -87,7 +91,16 @@ var PrimaryDrag = (function () {
         });
       },
       stop: function stop(event, ui) {
-        self._setPrimary();
+        var first = list.children("li[qq-file-id]:first-child");
+
+        var orderWasChanged = true;
+        var primaryWasChanged = false;
+
+        if (first.attr('qq-file-id') !== currentPrimary.attr('qq-file-id')) {
+          primaryWasChanged = true;
+        }
+
+        self._setPrimary(orderWasChanged, primaryWasChanged);
       }
     });
   };
@@ -96,7 +109,7 @@ var PrimaryDrag = (function () {
     this._setPrimary();
   };
 
-  PrimaryDrag.prototype._setPrimary = function _setPrimary() {
+  PrimaryDrag.prototype._setPrimary = function _setPrimary(orderWasChanged, primaryWasChanged) {
     var list = _fineuploaderClientDomUtilities.getFileList(this._uploader.settings.container);
 
     var first = list.children("li[qq-file-id]:first-child");
@@ -114,7 +127,13 @@ var PrimaryDrag = (function () {
     var name = this._uploader.fineuploader.getName(id);
     var upload_path = this._uploadPaths[id];
 
-    this._fireCallback(id, name, upload_path);
+    var order = [];
+    list.children('li[qq-file-id]').each(function (i, ele) {
+      var id = self._uploader.fineuploader.getId(ele);
+      order.push(self._uploadPaths[id]);
+    });
+
+    this._fireCallback(id, name, upload_path, order);
   };
 
   PrimaryDrag.prototype._setupListeners = function _setupListeners() {
