@@ -110,6 +110,7 @@ var PrimaryDrag = (function () {
   };
 
   PrimaryDrag.prototype._setPrimary = function _setPrimary(orderWasChanged, primaryWasChanged) {
+    var self = this;
     var list = _fineuploaderClientDomUtilities.getFileList(this._uploader.settings.container);
 
     var first = list.children("li[qq-file-id]:first-child");
